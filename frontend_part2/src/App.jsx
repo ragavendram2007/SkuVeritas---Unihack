@@ -4,6 +4,7 @@ import OperatorDashboard from './components/OperatorDashboard';
 import ProductTruthReport from './components/ProductTruthReport';
 import TrustLedger from './components/TrustLedger';
 import ErpExportPanel from './components/ErpExportPanel';
+import Part1CatalogConsole from './components/Part1CatalogConsole';
 import PresenterModeOverlay from './components/PresenterModeOverlay';
 import { fetchProducts, fetchResolvedProduct } from './api';
 import { AlertCircle, Loader2 } from 'lucide-react';
@@ -12,7 +13,7 @@ export default function App() {
   const [products, setProducts] = useState([]);
   const [selectedSku, setSelectedSku] = useState(null);
   const [productDetail, setProductDetail] = useState(null);
-  const [activeView, setActiveView] = useState('report');
+  const [activeView, setActiveView] = useState('dashboard');
   const [fallbackActive, setFallbackActive] = useState(false);
   const [isPresenterMode, setIsPresenterMode] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -63,20 +64,22 @@ export default function App() {
     return () => window.removeEventListener('pointermove', handlePointerMove);
   }, []);
 
-  // Global Navigation Keyboard Shortcuts: 1 = Dashboard, 2 = Report, 3 = Trust Ledger, 4 = ERP, P = Presenter Tour
+  // Global Navigation Keyboard Shortcuts: 1 = Part 1 Engine, 2 = Dashboard, 3 = Report, 4 = Trust Ledger, 5 = ERP, P = Presenter Tour
   useEffect(() => {
     const handleGlobalNavKeyDown = (e) => {
       const activeEl = document.activeElement;
       const isInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.isContentEditable);
       if (isInput) return; // Do not trigger navigation when typing in text inputs!
 
-      if (e.key === '1' || e.key === 'd' || e.key === 'D') {
+      if (e.key === '1') {
+        setActiveView('part1');
+      } else if (e.key === '2' || e.key === 'd' || e.key === 'D') {
         setActiveView('dashboard');
-      } else if (e.key === '2' || e.key === 'r' || e.key === 'R') {
+      } else if (e.key === '3' || e.key === 'r' || e.key === 'R') {
         setActiveView('report');
-      } else if (e.key === '3' || e.key === 'l' || e.key === 'L' || e.key === 't' || e.key === 'T') {
+      } else if (e.key === '4' || e.key === 'l' || e.key === 'L' || e.key === 't' || e.key === 'T') {
         setActiveView('ledger');
-      } else if (e.key === '4' || e.key === 'x' || e.key === 'X') {
+      } else if (e.key === '5' || e.key === 'x' || e.key === 'X') {
         setActiveView('erp');
       } else if (e.key === 'p' || e.key === 'P') {
         setIsPresenterMode(true);
@@ -136,10 +139,20 @@ export default function App() {
               <div className="w-12 h-12 rounded-full border-2 border-cyan-500/20 border-t-cyan-500 animate-spin" />
               <Loader2 className="w-6 h-6 text-cyan-400 animate-spin absolute" />
             </div>
-            <p className="text-xs font-mono text-cyan-300/80">Connecting to SkuVeritas Part 2 Trust & Delivery Layer...</p>
+            <p className="text-xs font-mono text-cyan-300/80">Connecting to SkuVeritas Unified Bundle...</p>
           </div>
         ) : (
           <>
+            {activeView === 'part1' && (
+              <Part1CatalogConsole
+                products={products}
+                onSelectProduct={(sku) => {
+                  loadProductDetail(sku);
+                  setActiveView('report');
+                }}
+              />
+            )}
+
             {activeView === 'dashboard' && (
               <OperatorDashboard
                 products={products}
@@ -183,12 +196,12 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2">
             <span className="brand-mark text-xs" style={{ width: '22px', height: '22px' }}>S</span>
-            <span>SkuVeritas Part 2 Trust & Delivery Layer</span>
+            <span>SkuVeritas Master Unified Bundle (Part 1 Data Engine + Part 2 Governance Layer)</span>
           </div>
           <div className="flex items-center space-x-4 text-slate-400">
-            <span>FastAPI API: :8001</span>
+            <span>Part 1 API: :8000</span>
             <span>•</span>
-            <span>Unify Glow-Dark Theme</span>
+            <span>Part 2 API: :8001</span>
           </div>
         </div>
       </footer>

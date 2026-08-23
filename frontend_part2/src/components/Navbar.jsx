@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layers, FileSpreadsheet, Activity, Wifi, WifiOff, FileText, Play, RotateCcw } from 'lucide-react';
+import { Layers, FileSpreadsheet, Activity, WifiOff, FileText, Play, RotateCcw, Cpu } from 'lucide-react';
 
 export default function Navbar({ activeView, setActiveView, onStartPresenterMode, onDemoReset }) {
   const [part1Connected, setPart1Connected] = useState(true);
@@ -40,20 +40,35 @@ export default function Navbar({ activeView, setActiveView, onStartPresenterMode
           <div>
             <div className="flex items-center space-x-2">
               <span className="font-extrabold text-base tracking-tight text-white font-mono brand">
-                SkuVeritas <span className="text-[#38d4ff] font-normal">Part 2</span>
+                SkuVeritas <span className="text-[#38d4ff] font-normal">Unified Bundle</span>
               </span>
               <span className="eyebrow text-[10px] py-0.5 px-2">
-                <span className="dot" /> TRUST & DELIVERY
+                <span className="dot" /> PART 1 + PART 2 BUNDLED
               </span>
             </div>
-            <p className="text-[11px] text-[#98a1b0] font-mono mt-0.5 truncate max-w-[280px]">
-              Product Dossiers • 3-Tier Routing • Adaptive Trust
+            <p className="text-[11px] text-[#98a1b0] font-mono mt-0.5 truncate max-w-[320px]">
+              Data Intelligence Engine & Governance Dashboard
             </p>
           </div>
         </div>
 
         {/* View Switcher */}
         <div className="hidden lg:flex items-center p-1 bg-[#0d1017] border border-[#1c222d] rounded-xl text-xs font-mono font-semibold">
+          
+          {/* Part 1 Engine Tab */}
+          <button
+            onClick={() => setActiveView('part1')}
+            className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg transition-all ${
+              activeView === 'part1'
+                ? 'bg-gradient-to-r from-[#38d4ff] to-[#0ea5e9] text-white shadow-lg'
+                : 'text-[#98a1b0] hover:text-white'
+            }`}
+          >
+            <Cpu className="w-3.5 h-3.5 text-cyan-300" />
+            <span>Part 1 Data Engine</span>
+          </button>
+
+          {/* Part 2 Dashboard Tab */}
           <button
             onClick={() => setActiveView('dashboard')}
             className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg transition-all ${
@@ -63,7 +78,7 @@ export default function Navbar({ activeView, setActiveView, onStartPresenterMode
             }`}
           >
             <Activity className="w-3.5 h-3.5" />
-            <span>Operator Dashboard</span>
+            <span>Part 2 Dashboard</span>
           </button>
 
           <button
@@ -131,7 +146,7 @@ export default function Navbar({ activeView, setActiveView, onStartPresenterMode
           ) : (
             <span className="eyebrow border-amber-500/30 text-amber-300">
               <WifiOff className="w-3 h-3 text-amber-400" />
-              <span className="hidden md:inline">Using Cached Data</span>
+              <span className="hidden md:inline">Using Cached Contract Data</span>
             </span>
           )}
         </div>
