@@ -1,0 +1,9 @@
+=== MANUFACTURER TECHNICAL SPECIFICATION SHEET ===
+Product Identifier: SV-5050
+Product Title: High Flow Brass Electric Solenoid Valve 24V
+Date of Issue: 2026-07-28T08:30:00Z
+
+TECHNICAL DATA:
+Operating Voltage: 24 V
+Orifice Diameter: 10 mm
+Operating Temp: 90 C

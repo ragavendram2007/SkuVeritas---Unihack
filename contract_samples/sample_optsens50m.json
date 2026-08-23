@@ -1,0 +1,48 @@
+{
+  "product_id": "OPT-SENS-50M",
+  "sku": "OPT-SENS-50M",
+  "product_name": "Precision Infrared Laser Distance Sensor 50m Range 24V",
+  "overall_trust_score": 100.0,
+  "attributes": {
+    "voltage": {
+      "resolved_value": 24,
+      "unit": "V",
+      "criticality": "HIGH",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "mfr_web_OPT-SENS-50M",
+          "source_type": "discovered_web",
+          "value": 24,
+          "unit": "V",
+          "raw_text": "24 V",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "mfr_pdf_OPT-SENS-50M",
+          "source_type": "manufacturer_pdf",
+          "value": 24,
+          "unit": "V",
+          "raw_text": "24 V",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "dist_grainger_OPT-SENS-50M",
+          "source_type": "discovered_web",
+          "value": 24,
+          "unit": "V",
+          "raw_text": "24 V",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-01T10:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    }
+  }
+}

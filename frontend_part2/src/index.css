@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #05070c;
+    color: #e2e8f0;
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(30, 41, 59, 0.4) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.6) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+/* Forensic Case File Dossier Panel */
+.dossier-panel {
+  background: rgba(13, 19, 32, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dossier-card {
+  background: linear-gradient(145deg, rgba(18, 25, 41, 0.9) 0%, rgba(10, 14, 23, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #05070c;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}

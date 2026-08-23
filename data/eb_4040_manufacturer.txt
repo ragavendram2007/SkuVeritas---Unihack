@@ -1,0 +1,9 @@
+=== MANUFACTURER TECHNICAL SPECIFICATION SHEET ===
+Product SKU: EB-4040
+Product Title: Cordless High Velocity Leaf Blower 20V
+Release Date: 2026-07-29T14:00:00Z
+
+PHYSICAL PROPERTIES:
+Net Weight: 1.8 kg
+Volts: 20 V
+Air Flow Capacity: 120 CFM

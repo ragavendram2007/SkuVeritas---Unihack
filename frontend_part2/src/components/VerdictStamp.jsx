@@ -1,0 +1,36 @@
+import React from 'react';
+import { ShieldCheck, ShieldAlert, AlertTriangle, CheckCircle2, Edit3 } from 'lucide-react';
+
+export default function VerdictStamp({ stamp = "AUTO-PUBLISHED", size = "normal" }) {
+  const normStamp = (stamp || "AUTO-PUBLISHED").toUpperCase();
+
+  let colorClasses = "bg-purple-500/10 text-purple-300 border-purple-500/40 shadow-purple-500/20";
+  let icon = <CheckCircle2 className="w-4 h-4 mr-1.5 inline" />;
+
+  if (normStamp === "APPROVED") {
+    colorClasses = "bg-emerald-500/15 text-emerald-300 border-emerald-500/50 shadow-emerald-500/20 ring-1 ring-emerald-500/30";
+    icon = <ShieldCheck className="w-4 h-4 mr-1.5 inline text-emerald-400" />;
+  } else if (normStamp === "OVERRIDDEN") {
+    colorClasses = "bg-cyan-500/15 text-cyan-300 border-cyan-500/50 shadow-cyan-500/20 ring-1 ring-cyan-500/30";
+    icon = <Edit3 className="w-4 h-4 mr-1.5 inline text-cyan-400" />;
+  } else if (normStamp === "BLOCKED") {
+    colorClasses = "bg-rose-500/20 text-rose-300 border-rose-500/60 shadow-rose-500/30 ring-1 ring-rose-500/40";
+    icon = <ShieldAlert className="w-4 h-4 mr-1.5 inline text-rose-400" />;
+  } else if (normStamp === "FLAGGED") {
+    colorClasses = "bg-amber-500/15 text-amber-300 border-amber-500/50 shadow-amber-500/20 ring-1 ring-amber-500/30";
+    icon = <AlertTriangle className="w-4 h-4 mr-1.5 inline text-amber-400" />;
+  }
+
+  const isLarge = size === "large";
+
+  return (
+    <div className="relative inline-block transform -rotate-2 hover:rotate-0 transition-transform duration-300">
+      <div className={`px-4 py-1.5 rounded-lg border-2 font-mono font-extrabold uppercase tracking-widest shadow-2xl flex items-center justify-center ${colorClasses} ${
+        isLarge ? 'text-base px-6 py-2.5 border-4' : 'text-xs'
+      }`}>
+        {icon}
+        <span>{normStamp}</span>
+      </div>
+    </div>
+  );
+}

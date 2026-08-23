@@ -1,0 +1,237 @@
+{
+  "product_id": "EB-4040",
+  "sku": "EB-4040",
+  "product_name": "Cordless High Velocity Leaf Blower 20V",
+  "overall_trust_score": 98.9,
+  "attributes": {
+    "weight": {
+      "resolved_value": 1.8,
+      "unit": "kg",
+      "criticality": "LOW",
+      "confidence": 0.855,
+      "risk": 0.036,
+      "conflict": true,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "eb_4040_erp_csv",
+          "source_type": "erp_csv",
+          "value": 1.8,
+          "unit": "kg",
+          "raw_text": "1.8 kg",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-04T09:30:00Z"
+        },
+        {
+          "source_id": "eb_4040_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 1.8,
+          "unit": "kg",
+          "raw_text": "1.8 kg",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-29T14:00:00Z"
+        },
+        {
+          "source_id": "eb_4040_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 1.8,
+          "unit": "kg",
+          "raw_text": "1.8 kg",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-03T18:00:00Z"
+        },
+        {
+          "source_id": "eb_4040_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": 8.1,
+          "unit": "kg",
+          "raw_text": "8.1 kg",
+          "reliability_weight": 0.4,
+          "last_modified": "2026-08-05T00:00:00Z"
+        }
+      ],
+      "diagnosis": {
+        "cause": "Digit Transposition / OCR Misread",
+        "confidence": 0.85,
+        "explanation": "Outlier value 8.1 on eb_4040_scraped_webpage matches digit transposition pattern against majority value 1.8. Digits '81' in outlier '8.1' are a direct transposition of majority digits '18' ('1.8').",
+        "reasoning_trail": [
+          {
+            "step": "Unit Conversion Check",
+            "passed": false,
+            "details": "Numerical ratio 4.50 does not match standard unit conversion factors (PSI/bar, kg/lb, C/F, mm/in)."
+          },
+          {
+            "step": "Digit Transposition Check",
+            "passed": true,
+            "details": "Digits '81' in outlier '8.1' are a direct transposition of majority digits '18' ('1.8')."
+          },
+          {
+            "step": "Stale Revision Check",
+            "passed": false,
+            "details": "Outlier timestamp is within 0.6 days of majority sources."
+          },
+          {
+            "step": "SKU Mismatch Check",
+            "passed": false,
+            "details": "Product SKU match was exact (1.00)."
+          }
+        ]
+      }
+    },
+    "voltage": {
+      "resolved_value": 20,
+      "unit": "V",
+      "criticality": "HIGH",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "eb_4040_scraped_webpage"
+      ],
+      "sources": [
+        {
+          "source_id": "eb_4040_erp_csv",
+          "source_type": "erp_csv",
+          "value": 20,
+          "unit": "V",
+          "raw_text": "20 V",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-04T09:30:00Z"
+        },
+        {
+          "source_id": "eb_4040_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 20,
+          "unit": "V",
+          "raw_text": "20 V",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-29T14:00:00Z"
+        },
+        {
+          "source_id": "eb_4040_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 20,
+          "unit": "V",
+          "raw_text": "20 V",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-03T18:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "air_flow": {
+      "resolved_value": 120,
+      "unit": "CFM",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "eb_4040_manufacturer_pdf",
+        "eb_4040_scraped_webpage"
+      ],
+      "sources": [
+        {
+          "source_id": "eb_4040_erp_csv",
+          "source_type": "erp_csv",
+          "value": 120,
+          "unit": "CFM",
+          "raw_text": "120 CFM",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-04T09:30:00Z"
+        },
+        {
+          "source_id": "eb_4040_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 120,
+          "unit": "CFM",
+          "raw_text": "120 CFM",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-03T18:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "flow_rate": {
+      "resolved_value": 120,
+      "unit": "CFM",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "eb_4040_erp_csv",
+        "eb_4040_supplier_excel",
+        "eb_4040_scraped_webpage"
+      ],
+      "sources": [
+        {
+          "source_id": "eb_4040_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 120,
+          "unit": "CFM",
+          "raw_text": "120 CFM",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-29T14:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "input_voltage": {
+      "resolved_value": 20,
+      "unit": "V",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "eb_4040_erp_csv",
+        "eb_4040_manufacturer_pdf",
+        "eb_4040_supplier_excel"
+      ],
+      "sources": [
+        {
+          "source_id": "eb_4040_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": 20,
+          "unit": "V",
+          "raw_text": "20 V",
+          "reliability_weight": 0.4,
+          "last_modified": "2026-08-05T00:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "air_capacity": {
+      "resolved_value": 120,
+      "unit": "CFM",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "eb_4040_erp_csv",
+        "eb_4040_manufacturer_pdf",
+        "eb_4040_supplier_excel"
+      ],
+      "sources": [
+        {
+          "source_id": "eb_4040_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": 120,
+          "unit": "CFM",
+          "raw_text": "120 CFM",
+          "reliability_weight": 0.4,
+          "last_modified": "2026-08-05T00:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    }
+  }
+}

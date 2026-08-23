@@ -1,0 +1,88 @@
+{
+  "product_id": "SOLAR-INV-5000",
+  "sku": "SOLAR-INV-5000",
+  "product_name": "5000W Solar Grid-Tie Power Inverter 240V 20A",
+  "overall_trust_score": 100.0,
+  "attributes": {
+    "voltage": {
+      "resolved_value": 240,
+      "unit": "V",
+      "criticality": "HIGH",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "mfr_web_SOLAR-INV-5000",
+          "source_type": "discovered_web",
+          "value": 240,
+          "unit": "V",
+          "raw_text": "240 V",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "mfr_pdf_SOLAR-INV-5000",
+          "source_type": "manufacturer_pdf",
+          "value": 240,
+          "unit": "V",
+          "raw_text": "240 V",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "dist_grainger_SOLAR-INV-5000",
+          "source_type": "discovered_web",
+          "value": 240,
+          "unit": "V",
+          "raw_text": "240 V",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-01T10:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "amperage": {
+      "resolved_value": 20,
+      "unit": "A",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "mfr_web_SOLAR-INV-5000",
+          "source_type": "discovered_web",
+          "value": 20,
+          "unit": "A",
+          "raw_text": "20 A",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "mfr_pdf_SOLAR-INV-5000",
+          "source_type": "manufacturer_pdf",
+          "value": 20,
+          "unit": "A",
+          "raw_text": "20 A",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "dist_grainger_SOLAR-INV-5000",
+          "source_type": "discovered_web",
+          "value": 20,
+          "unit": "A",
+          "raw_text": "20 A",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-01T10:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    }
+  }
+}

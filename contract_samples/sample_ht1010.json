@@ -1,0 +1,193 @@
+{
+  "product_id": "HT-1010",
+  "sku": "HT-1010",
+  "product_name": "Professional Ratcheting Socket Wrench 3/8-inch",
+  "overall_trust_score": 100.0,
+  "attributes": {
+    "weight": {
+      "resolved_value": 0.45,
+      "unit": "kg",
+      "criticality": "LOW",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "ht_1010_supplier_excel"
+      ],
+      "sources": [
+        {
+          "source_id": "ht_1010_erp_csv",
+          "source_type": "erp_csv",
+          "value": 0.45,
+          "unit": "kg",
+          "raw_text": "0.45 kg",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-02T11:00:00Z"
+        },
+        {
+          "source_id": "ht_1010_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 0.45,
+          "unit": "kg",
+          "raw_text": "0.45 kg",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-25T09:00:00Z"
+        },
+        {
+          "source_id": "ht_1010_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": 0.45,
+          "unit": "kg",
+          "raw_text": "0.45 kg",
+          "reliability_weight": 0.4,
+          "last_modified": "2026-08-05T00:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "material": {
+      "resolved_value": "Chrome Vanadium Steel",
+      "unit": "",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "ht_1010_manufacturer_pdf"
+      ],
+      "sources": [
+        {
+          "source_id": "ht_1010_erp_csv",
+          "source_type": "erp_csv",
+          "value": "Chrome Vanadium Steel",
+          "unit": "",
+          "raw_text": "Chrome Vanadium Steel",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-02T11:00:00Z"
+        },
+        {
+          "source_id": "ht_1010_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": "Chrome Vanadium Steel",
+          "unit": "",
+          "raw_text": "Chrome Vanadium Steel",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-01T16:20:00Z"
+        },
+        {
+          "source_id": "ht_1010_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": "Chrome Vanadium Steel",
+          "unit": "",
+          "raw_text": "Chrome Vanadium Steel",
+          "reliability_weight": 0.4,
+          "last_modified": "2026-08-05T00:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "handle_type": {
+      "resolved_value": "Ergonomic Rubber",
+      "unit": "",
+      "criticality": "LOW",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "ht_1010_erp_csv",
+          "source_type": "erp_csv",
+          "value": "Ergonomic Rubber",
+          "unit": "",
+          "raw_text": "Ergonomic Rubber",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-02T11:00:00Z"
+        },
+        {
+          "source_id": "ht_1010_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": "Ergonomic Rubber",
+          "unit": "",
+          "raw_text": "Ergonomic Rubber",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-25T09:00:00Z"
+        },
+        {
+          "source_id": "ht_1010_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": "Ergonomic Rubber",
+          "unit": "",
+          "raw_text": "Ergonomic Rubber",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-01T16:20:00Z"
+        },
+        {
+          "source_id": "ht_1010_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": "Ergonomic Rubber",
+          "unit": "",
+          "raw_text": "Ergonomic Rubber",
+          "reliability_weight": 0.4,
+          "last_modified": "2026-08-05T00:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "construction_material": {
+      "resolved_value": "Chrome Vanadium Steel",
+      "unit": "",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "ht_1010_erp_csv",
+        "ht_1010_supplier_excel",
+        "ht_1010_scraped_webpage"
+      ],
+      "sources": [
+        {
+          "source_id": "ht_1010_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": "Chrome Vanadium Steel",
+          "unit": "",
+          "raw_text": "Chrome Vanadium Steel",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-25T09:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "weight_kg": {
+      "resolved_value": 0.45,
+      "unit": "kg",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "ht_1010_erp_csv",
+        "ht_1010_manufacturer_pdf",
+        "ht_1010_scraped_webpage"
+      ],
+      "sources": [
+        {
+          "source_id": "ht_1010_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 0.45,
+          "unit": "kg",
+          "raw_text": "0.45 kg",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-01T16:20:00Z"
+        }
+      ],
+      "diagnosis": null
+    }
+  }
+}

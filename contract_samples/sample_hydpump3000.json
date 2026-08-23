@@ -1,0 +1,48 @@
+{
+  "product_id": "HYD-PUMP-3000",
+  "sku": "HYD-PUMP-3000",
+  "product_name": "Industrial High Pressure Hydraulic Vane Pump 3000 PSI",
+  "overall_trust_score": 100.0,
+  "attributes": {
+    "material": {
+      "resolved_value": "Stainless Steel",
+      "unit": "",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "mfr_web_HYD-PUMP-3000",
+          "source_type": "discovered_web",
+          "value": "Stainless Steel",
+          "unit": "",
+          "raw_text": "Stainless Steel",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "mfr_pdf_HYD-PUMP-3000",
+          "source_type": "manufacturer_pdf",
+          "value": "Stainless Steel",
+          "unit": "",
+          "raw_text": "Stainless Steel",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "dist_grainger_HYD-PUMP-3000",
+          "source_type": "discovered_web",
+          "value": "Stainless Steel",
+          "unit": "",
+          "raw_text": "Stainless Steel",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-08-01T10:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    }
+  }
+}

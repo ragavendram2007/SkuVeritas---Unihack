@@ -1,0 +1,174 @@
+{
+  "product_id": "SV-5050",
+  "sku": "SV-5050",
+  "product_name": "High Flow Brass Electric Solenoid Valve 24V",
+  "overall_trust_score": 94.2,
+  "attributes": {
+    "voltage": {
+      "resolved_value": 24,
+      "unit": "V",
+      "criticality": "HIGH",
+      "confidence": 0.855,
+      "risk": 0.145,
+      "conflict": true,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "sv_5050_erp_csv",
+          "source_type": "erp_csv",
+          "value": 24,
+          "unit": "V",
+          "raw_text": "24 V",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "sv_5050_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 24,
+          "unit": "V",
+          "raw_text": "24 V",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-28T08:30:00Z"
+        },
+        {
+          "source_id": "sv_5050_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 24,
+          "unit": "V",
+          "raw_text": "24 V",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-07-30T14:15:00Z"
+        },
+        {
+          "source_id": "sv_5050_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": 12,
+          "unit": "V",
+          "raw_text": "12 V",
+          "reliability_weight": 0.4,
+          "last_modified": "2024-01-10T10:00:00Z"
+        }
+      ],
+      "diagnosis": {
+        "cause": "Stale Revision",
+        "confidence": 0.78,
+        "explanation": "Outlier value 12 on sv_5050_scraped_webpage comes from an obsolete source revision. Outlier source timestamp (2024-01-10) is 934.0 days older than latest majority record (2026-08-01).",
+        "reasoning_trail": [
+          {
+            "step": "Unit Conversion Check",
+            "passed": false,
+            "details": "Numerical ratio 2.00 does not match standard unit conversion factors (PSI/bar, kg/lb, C/F, mm/in)."
+          },
+          {
+            "step": "Digit Transposition Check",
+            "passed": false,
+            "details": "Digits '12' vs '24' do not match transposition or single digit swap pattern."
+          },
+          {
+            "step": "Stale Revision Check",
+            "passed": true,
+            "details": "Outlier source timestamp (2024-01-10) is 934.0 days older than latest majority record (2026-08-01)."
+          },
+          {
+            "step": "SKU Mismatch Check",
+            "passed": false,
+            "details": "Product SKU match was exact (1.00)."
+          }
+        ]
+      }
+    },
+    "orifice_diameter": {
+      "resolved_value": 10,
+      "unit": "mm",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "sv_5050_scraped_webpage"
+      ],
+      "sources": [
+        {
+          "source_id": "sv_5050_erp_csv",
+          "source_type": "erp_csv",
+          "value": 10,
+          "unit": "mm",
+          "raw_text": "10 mm",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "sv_5050_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 10,
+          "unit": "mm",
+          "raw_text": "10 mm",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-28T08:30:00Z"
+        },
+        {
+          "source_id": "sv_5050_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 10,
+          "unit": "mm",
+          "raw_text": "10 mm",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-07-30T14:15:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "max_temp": {
+      "resolved_value": 90,
+      "unit": "C",
+      "criticality": "HIGH",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "sv_5050_erp_csv",
+          "source_type": "erp_csv",
+          "value": 90,
+          "unit": "C",
+          "raw_text": "90 C",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "sv_5050_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 90,
+          "unit": "C",
+          "raw_text": "90 C",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-28T08:30:00Z"
+        },
+        {
+          "source_id": "sv_5050_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 90,
+          "unit": "C",
+          "raw_text": "90 C",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-07-30T14:15:00Z"
+        },
+        {
+          "source_id": "sv_5050_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": 90,
+          "unit": "C",
+          "raw_text": "90 C",
+          "reliability_weight": 0.4,
+          "last_modified": "2024-01-10T10:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    }
+  }
+}

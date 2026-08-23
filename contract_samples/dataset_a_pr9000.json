@@ -1,0 +1,207 @@
+{
+  "product_id": "PR-9000",
+  "sku": "PR-9000",
+  "product_name": "Industrial High Pressure Regulator Valve",
+  "overall_trust_score": 95.2,
+  "attributes": {
+    "pressure_rating": {
+      "resolved_value": 200,
+      "unit": "PSI",
+      "criticality": "HIGH",
+      "confidence": 0.855,
+      "risk": 0.145,
+      "conflict": true,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "pr_9000_erp_csv",
+          "source_type": "erp_csv",
+          "value": 200,
+          "unit": "PSI",
+          "raw_text": "200 PSI",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "pr_9000_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 200,
+          "unit": "PSI",
+          "raw_text": "200 PSI",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-28T08:30:00Z"
+        },
+        {
+          "source_id": "pr_9000_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 200,
+          "unit": "PSI",
+          "raw_text": "200 PSI",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-07-30T14:15:00Z"
+        },
+        {
+          "source_id": "pr_9000_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": 300,
+          "unit": "PSI",
+          "raw_text": "300 PSI",
+          "reliability_weight": 0.4,
+          "last_modified": "2026-08-05T12:00:00Z"
+        }
+      ],
+      "diagnosis": {
+        "cause": "Unit Conversion Error",
+        "confidence": 0.88,
+        "explanation": "Outlier value 300 PSI on pr_9000_scraped_webpage is a unit mislabel error. Outlier value 300.0 PSI is ~20.7 bar mislabeled as PSI (Ratio 1.50 matching PSI\u2194bar conversion factor).",
+        "reasoning_trail": [
+          {
+            "step": "Unit Conversion Check",
+            "passed": true,
+            "details": "Outlier value 300.0 PSI is ~20.7 bar mislabeled as PSI (Ratio 1.50 matching PSI\u2194bar conversion factor)."
+          },
+          {
+            "step": "Digit Transposition Check",
+            "passed": true,
+            "details": "Outlier '300' differs from majority '200' by a single digit swap (likely OCR misread)."
+          },
+          {
+            "step": "Stale Revision Check",
+            "passed": false,
+            "details": "Outlier timestamp is within 4.1 days of majority sources."
+          },
+          {
+            "step": "SKU Mismatch Check",
+            "passed": false,
+            "details": "Product SKU match was exact (1.00)."
+          }
+        ]
+      }
+    },
+    "max_temp": {
+      "resolved_value": 150,
+      "unit": "C",
+      "criticality": "HIGH",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "pr_9000_erp_csv",
+          "source_type": "erp_csv",
+          "value": 150,
+          "unit": "C",
+          "raw_text": "150 C",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "pr_9000_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 150,
+          "unit": "C",
+          "raw_text": "150 C",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-28T08:30:00Z"
+        },
+        {
+          "source_id": "pr_9000_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 150,
+          "unit": "C",
+          "raw_text": "150 C",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-07-30T14:15:00Z"
+        },
+        {
+          "source_id": "pr_9000_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": 150,
+          "unit": "C",
+          "raw_text": "150 C",
+          "reliability_weight": 0.4,
+          "last_modified": "2026-08-05T12:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "flow_rate": {
+      "resolved_value": 45,
+      "unit": "GPM",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": false,
+      "missing_in": [],
+      "sources": [
+        {
+          "source_id": "pr_9000_erp_csv",
+          "source_type": "erp_csv",
+          "value": 45,
+          "unit": "GPM",
+          "raw_text": "45 GPM",
+          "reliability_weight": 0.9,
+          "last_modified": "2026-08-01T10:00:00Z"
+        },
+        {
+          "source_id": "pr_9000_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": 45,
+          "unit": "GPM",
+          "raw_text": "45 GPM",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-28T08:30:00Z"
+        },
+        {
+          "source_id": "pr_9000_supplier_excel",
+          "source_type": "supplier_excel",
+          "value": 45,
+          "unit": "GPM",
+          "raw_text": "45 GPM",
+          "reliability_weight": 0.6,
+          "last_modified": "2026-07-30T14:15:00Z"
+        },
+        {
+          "source_id": "pr_9000_scraped_webpage",
+          "source_type": "scraped_webpage",
+          "value": 45,
+          "unit": "GPM",
+          "raw_text": "45 GPM",
+          "reliability_weight": 0.4,
+          "last_modified": "2026-08-05T12:00:00Z"
+        }
+      ],
+      "diagnosis": null
+    },
+    "material": {
+      "resolved_value": "Forged Stainless Steel 316",
+      "unit": "",
+      "criticality": "MEDIUM",
+      "confidence": 1.0,
+      "risk": 0.0,
+      "conflict": false,
+      "missing": true,
+      "missing_in": [
+        "pr_9000_erp_csv",
+        "pr_9000_supplier_excel",
+        "pr_9000_scraped_webpage"
+      ],
+      "sources": [
+        {
+          "source_id": "pr_9000_manufacturer_pdf",
+          "source_type": "manufacturer_pdf",
+          "value": "Forged Stainless Steel 316",
+          "unit": "",
+          "raw_text": "Forged Stainless Steel 316",
+          "reliability_weight": 0.85,
+          "last_modified": "2026-07-28T08:30:00Z"
+        }
+      ],
+      "diagnosis": null
+    }
+  }
+}

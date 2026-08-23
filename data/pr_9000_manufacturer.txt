@@ -1,0 +1,10 @@
+=== MANUFACTURER TECHNICAL SPECIFICATION SHEET ===
+Product Identifier: PR-9000
+Product Title: Industrial High Pressure Regulator Valve
+Date of Issue: 2026-07-28T08:30:00Z
+
+OPERATING SPECIFICATIONS:
+Max Working Pressure (MWP): 200 PSI
+Operating Temperature: 150 C
+Flow Capacity: 45 GPM
+Body Material: Forged Stainless Steel 316

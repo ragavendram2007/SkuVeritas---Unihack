@@ -1,0 +1,9 @@
+=== MANUFACTURER TECHNICAL SPECIFICATION SHEET ===
+Product SKU: HT-1010
+Product Name: Professional Ratcheting Socket Wrench 3/8-inch
+Specification Date: 2026-07-25T09:00:00Z
+
+TECHNICAL DATA:
+Net Weight: 0.45 kg
+Construction Material: Chrome Vanadium Steel
+Handle Type: Ergonomic Rubber
