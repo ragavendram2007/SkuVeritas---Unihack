@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layers, TrendingUp, TrendingDown, Minus, Clock, ShieldCheck, Cpu } from 'lucide-react';
+import { Layers, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { fetchTrustLeaderboard, fetchTrustHistory } from '../api';
 
 export default function TrustLedger() {
@@ -9,10 +9,11 @@ export default function TrustLedger() {
 
   const loadTrustData = async () => {
     try {
-      const lb = await fetchTrustLeaderboard();
-      setLeaderboard(lb);
-      if (!selectedSource && lb.length > 0) {
-        loadHistory(lb[0].source_id);
+      const data = await fetchTrustLeaderboard();
+      const list = Array.isArray(data) ? data : (data?.trust_leaderboard || []);
+      setLeaderboard(list);
+      if (!selectedSource && list.length > 0) {
+        loadHistory(list[0].source_id);
       }
     } catch (err) {
       console.error('Error loading trust leaderboard:', err);
@@ -22,8 +23,9 @@ export default function TrustLedger() {
   const loadHistory = async (sourceId) => {
     try {
       setSelectedSource(sourceId);
-      const logs = await fetchTrustHistory(sourceId);
-      setHistoryLogs(logs);
+      const data = await fetchTrustHistory(sourceId);
+      const list = Array.isArray(data) ? data : (data?.history || []);
+      setHistoryLogs(list);
     } catch (err) {
       console.error('Error loading trust history:', err);
     }
@@ -37,11 +39,11 @@ export default function TrustLedger() {
     <div className="space-y-6 font-sans">
       
       {/* Header */}
-      <div className="dossier-panel rounded-2xl p-6 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="glass-card p-6 border border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center space-x-2">
-            <Layers className="w-5 h-5 text-indigo-400" />
-            <h2 className="text-xl font-extrabold text-white tracking-tight">Adaptive Source Trust Ledger</h2>
+            <span className="badge-pill">◆ ADAPTIVE TRUST LEDGER</span>
+            <h2 className="text-xl font-extrabold text-white tracking-tight font-mono">Adaptive Source Trust Ledger</h2>
           </div>
           <p className="text-xs text-slate-400 font-mono mt-1">
             Audit Trail Log: Per-Source-Per-Attribute Reliability Weight Adjustments Over Time
@@ -49,7 +51,7 @@ export default function TrustLedger() {
         </div>
 
         <div className="flex items-center space-x-2 text-xs font-mono">
-          <span className="px-3 py-1.5 rounded-xl bg-indigo-500/10 text-indigo-300 border border-indigo-500/30">
+          <span className="px-3 py-1.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 font-bold">
             ● Real-Time Moving-Average Nudges
           </span>
         </div>
@@ -58,7 +60,7 @@ export default function TrustLedger() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Source Reliability Leaderboard */}
-        <div className="dossier-panel rounded-2xl p-5 border border-slate-800 space-y-4">
+        <div className="glass-card p-5 border border-slate-800/80 space-y-4">
           <h3 className="font-mono font-bold text-white text-sm flex items-center justify-between">
             <span>Adaptive Trust Leaderboard</span>
             <span className="text-xs text-slate-400 font-normal">{leaderboard.length} Sources</span>
@@ -73,8 +75,8 @@ export default function TrustLedger() {
                   onClick={() => loadHistory(item.source_id)}
                   className={`p-3 rounded-xl border text-xs cursor-pointer transition-all ${
                     isSelected
-                      ? 'bg-indigo-500/15 border-indigo-500/50 text-white shadow-lg'
-                      : 'bg-slate-900/60 border-slate-800/80 text-slate-300 hover:bg-slate-800/50'
+                      ? 'bg-cyan-500/15 border-cyan-500/50 text-white shadow-lg shadow-cyan-500/10'
+                      : 'bg-slate-950/60 border-slate-800/80 text-slate-300 hover:bg-slate-800/50'
                   }`}
                 >
                   <div className="flex items-center justify-between font-mono">
@@ -83,12 +85,12 @@ export default function TrustLedger() {
                       item.trend === 'UP' ? 'bg-emerald-500/20 text-emerald-400' : item.trend === 'DOWN' ? 'bg-rose-500/20 text-rose-400' : 'bg-slate-800 text-slate-400'
                     }`}>
                       {item.trend === 'UP' ? <TrendingUp className="w-3 h-3" /> : item.trend === 'DOWN' ? <TrendingDown className="w-3 h-3" /> : <Minus className="w-3 h-3" />}
-                      <span>w = {item.current_weight.toFixed(2)}</span>
+                      <span>w = {item.current_weight ? item.current_weight.toFixed(2) : '0.50'}</span>
                     </span>
                   </div>
 
-                  <div className="mt-2 flex items-center justify-between text-[10px] text-slate-500 font-mono">
-                    <span>{item.adjustments_count} Adjustments</span>
+                  <div className="mt-2 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+                    <span>{item.adjustments_count || 0} Adjustments</span>
                     <span>{item.last_adjustment ? item.last_adjustment.split(' ')[0] : 'N/A'}</span>
                   </div>
                 </div>
@@ -98,10 +100,10 @@ export default function TrustLedger() {
         </div>
 
         {/* Audit Trail Log Details */}
-        <div className="lg:col-span-2 dossier-panel rounded-2xl p-5 border border-slate-800 space-y-4">
-          <div className="flex items-center justify-between font-mono border-b border-slate-800 pb-3">
+        <div className="lg:col-span-2 glass-card p-5 border border-slate-800/80 space-y-4">
+          <div className="flex items-center justify-between font-mono border-b border-slate-800/80 pb-3">
             <h3 className="font-bold text-white text-sm">
-              Audit Trail Ledger: <span className="text-indigo-300">{selectedSource || 'All Sources'}</span>
+              Audit Trail Ledger: <span className="text-cyan-300">{selectedSource || 'All Sources'}</span>
             </h3>
             <span className="text-xs text-slate-400">{historyLogs.length} Timestamped Events</span>
           </div>
@@ -121,16 +123,16 @@ export default function TrustLedger() {
                 {historyLogs.map((log, i) => (
                   <tr key={i} className="hover:bg-slate-800/40">
                     <td className="py-3 px-3 text-slate-400 text-[11px]">{log.timestamp}</td>
-                    <td className="py-3 px-3 font-bold text-cyan-300">{log.product_id}</td>
-                    <td className="py-3 px-3 font-bold text-indigo-300">{log.attribute_type}</td>
+                    <td className="py-3 px-3 font-bold text-cyan-300">{log.product_id || 'N/A'}</td>
+                    <td className="py-3 px-3 font-bold text-indigo-300">{log.attribute_type || 'General'}</td>
                     <td className="py-3 px-3 font-bold">
-                      <span className="text-slate-400">{log.old_weight.toFixed(2)}</span>
-                      <span className="mx-1 text-slate-500">$\rightarrow$</span>
-                      <span className={log.new_weight > log.old_weight ? "text-emerald-400" : "text-rose-400"}>
-                        {log.new_weight.toFixed(2)}
+                      <span className="text-slate-400">{log.old_weight ? log.old_weight.toFixed(2) : '0.40'}</span>
+                      <span className="mx-1 text-slate-500">→</span>
+                      <span className={(log.new_weight || 0) >= (log.old_weight || 0) ? "text-emerald-400" : "text-rose-400"}>
+                        {log.new_weight ? log.new_weight.toFixed(2) : '0.35'}
                       </span>
                     </td>
-                    <td className="py-3 px-3 text-slate-300 max-w-xs truncate">{log.reason}</td>
+                    <td className="py-3 px-3 text-slate-300 max-w-xs truncate">{log.reason || log.action || 'Initial weight'}</td>
                   </tr>
                 ))}
               </tbody>

@@ -53,12 +53,36 @@ export default function App() {
     alert('Demo State Reset: All review actions and adaptive trust nudges returned to seed state.');
   };
 
+  // Global Navigation Keyboard Shortcuts: 1 = Dashboard, 2 = Report, 3 = Trust Ledger, 4 = ERP, P = Presenter Tour
+  useEffect(() => {
+    const handleGlobalNavKeyDown = (e) => {
+      const activeEl = document.activeElement;
+      const isInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.isContentEditable);
+      if (isInput) return; // Do not trigger navigation when typing in text inputs!
+
+      if (e.key === '1' || e.key === 'd' || e.key === 'D') {
+        setActiveView('dashboard');
+      } else if (e.key === '2' || e.key === 'r' || e.key === 'R') {
+        setActiveView('report');
+      } else if (e.key === '3' || e.key === 'l' || e.key === 'L' || e.key === 't' || e.key === 'T') {
+        setActiveView('ledger');
+      } else if (e.key === '4' || e.key === 'x' || e.key === 'X') {
+        setActiveView('erp');
+      } else if (e.key === 'p' || e.key === 'P') {
+        setIsPresenterMode(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalNavKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalNavKeyDown);
+  }, []);
+
   useEffect(() => {
     loadProductsData();
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#05070c] text-slate-100 flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
       
       <Navbar
         activeView={activeView}
@@ -88,10 +112,10 @@ export default function App() {
         {loading ? (
           <div className="py-32 flex flex-col items-center justify-center space-y-4 text-slate-400">
             <div className="relative flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full border-2 border-indigo-500/20 border-t-indigo-500 animate-spin" />
-              <Loader2 className="w-6 h-6 text-indigo-400 animate-spin absolute" />
+              <div className="w-12 h-12 rounded-full border-2 border-cyan-500/20 border-t-cyan-500 animate-spin" />
+              <Loader2 className="w-6 h-6 text-cyan-400 animate-spin absolute" />
             </div>
-            <p className="text-xs font-mono text-indigo-300/80">Connecting to SkuVeritas Part 2 Trust & Delivery Layer...</p>
+            <p className="text-xs font-mono text-cyan-300/80">Connecting to SkuVeritas Part 2 Trust & Delivery Layer...</p>
           </div>
         ) : (
           <>
@@ -134,10 +158,10 @@ export default function App() {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 bg-[#030408] py-6 text-slate-500 text-xs font-mono">
+      <footer className="border-t border-slate-900/90 bg-[#04060c] py-6 text-slate-400 text-xs font-mono">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
             <span>SkuVeritas Part 2 Complete Build — Trust & Delivery Layer</span>
           </div>
           <div className="flex items-center space-x-4 text-slate-400">
