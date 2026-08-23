@@ -1,13 +1,41 @@
-import React from 'react';
-import { ShieldCheck, Layers, LayoutGrid, FileSpreadsheet, Activity, Wifi, WifiOff, FileText, Play, RotateCcw } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ShieldCheck, Layers, FileSpreadsheet, Activity, Wifi, WifiOff, FileText, Play, RotateCcw } from 'lucide-react';
 
-export default function Navbar({ activeView, setActiveView, fallbackActive = false, onStartPresenterMode, onDemoReset }) {
+export default function Navbar({ activeView, setActiveView, onStartPresenterMode, onDemoReset }) {
+  const [part1Connected, setPart1Connected] = useState(true);
+
+  // Real-time connectivity polling to Part 1 Backend (:8000)
+  useEffect(() => {
+    let isMounted = true;
+
+    const checkPart1Health = async () => {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        
+        const res = await fetch('http://localhost:8000/', { signal: controller.signal });
+        clearTimeout(timeoutId);
+        
+        if (isMounted) setPart1Connected(res.ok);
+      } catch (err) {
+        if (isMounted) setPart1Connected(false);
+      }
+    };
+
+    checkPart1Health();
+    const interval = setInterval(checkPart1Health, 4000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
-    <header className="border-b border-slate-800 bg-[#070a10]/90 backdrop-blur-md sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="border-b border-slate-800/90 bg-[#070a10]/95 backdrop-blur-md sticky top-0 z-[10] shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         
         {/* Brand */}
-        <div className="flex items-center space-x-3.5">
+        <div className="flex items-center space-x-3.5 shrink-0">
           <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-indigo-500/20 to-purple-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-lg shadow-indigo-500/10">
             <ShieldCheck className="w-5 h-5" />
           </div>
@@ -20,7 +48,7 @@ export default function Navbar({ activeView, setActiveView, fallbackActive = fal
                 Trust & Delivery Layer
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 font-mono mt-0.5">
+            <p className="text-[11px] text-slate-400 font-mono mt-0.5 truncate max-w-[280px]">
               Product Dossiers • 3-Tier Routing • Adaptive Source Trust
             </p>
           </div>
@@ -77,8 +105,8 @@ export default function Navbar({ activeView, setActiveView, fallbackActive = fal
           </button>
         </div>
 
-        {/* Action Controls & Resilience Status */}
-        <div className="flex items-center space-x-3 text-xs font-mono">
+        {/* Action Controls & Real-Time Resilience Indicator */}
+        <div className="flex items-center space-x-3 text-xs font-mono shrink-0">
           <button
             onClick={onStartPresenterMode}
             className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/40 font-bold transition-all"
@@ -96,15 +124,16 @@ export default function Navbar({ activeView, setActiveView, fallbackActive = fal
             <span className="hidden sm:inline">Demo Reset</span>
           </button>
 
-          {fallbackActive ? (
-            <span className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-300 border border-amber-500/30">
-              <WifiOff className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden md:inline">Using Cached Contract Data</span>
+          {/* Real-time Connectivity Indicator */}
+          {part1Connected ? (
+            <span className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 font-semibold">
+              <Wifi className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+              <span className="hidden md:inline">Part 1 API Connected</span>
             </span>
           ) : (
-            <span className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
-              <Wifi className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="hidden md:inline">Part 1 API Connected</span>
+            <span className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-300 border border-amber-500/30 font-semibold">
+              <WifiOff className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden md:inline">Using Cached Contract Data</span>
             </span>
           )}
         </div>

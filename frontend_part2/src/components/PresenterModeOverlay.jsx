@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, ArrowRight, ArrowLeft, X, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Play, ArrowRight, ArrowLeft, X, Sparkles } from 'lucide-react';
 
 const STEPS = [
   {
@@ -19,7 +19,7 @@ const STEPS = [
   },
   {
     title: "4. 3-Tier Routing Engine Decision",
-    desc: "Evaluates hard-block threshold: pressure_rating risk 0.145 exceeds 0.10 limit $\rightarrow$ BLOCKED verdict stamp.",
+    desc: "Evaluates hard-block threshold: pressure_rating risk 0.145 exceeds 0.10 limit → BLOCKED verdict stamp.",
     highlight: "BLOCKED Verdict Stamp"
   },
   {
@@ -29,7 +29,7 @@ const STEPS = [
   },
   {
     title: "6. Adaptive Source Trust Ledger",
-    desc: "System nudges unreliable source weight down (0.40 $\rightarrow$ 0.35) and logs event in audit trail.",
+    desc: "System nudges unreliable source weight down (0.40 → 0.35) and logs event in audit trail.",
     highlight: "Trust Ledger Audit Trail"
   },
   {
@@ -58,14 +58,22 @@ export default function PresenterModeOverlay({ onClose }) {
 
   useEffect(() => {
     const handleKeyDown = (e) => {
+      const activeEl = document.activeElement;
+      const isInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.isContentEditable);
+      if (isInput) return;
+
       if (e.key === 'ArrowRight' || e.key === 'Space') {
+        e.preventDefault();
         handleNext();
       } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
         handlePrev();
       } else if (e.key === 'Escape') {
+        e.preventDefault();
         onClose();
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [currentStep]);
@@ -73,7 +81,7 @@ export default function PresenterModeOverlay({ onClose }) {
   const step = STEPS[currentStep];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-full max-w-md font-sans animate-fadeIn">
+    <div className="fixed bottom-6 right-6 z-[40] w-full max-w-md font-sans animate-fadeIn">
       <div className="dossier-panel rounded-2xl p-5 border-2 border-indigo-500/50 shadow-2xl bg-slate-950/95 space-y-3">
         
         {/* Header */}
@@ -107,7 +115,7 @@ export default function PresenterModeOverlay({ onClose }) {
             <span>Prev</span>
           </button>
 
-          <span className="text-[10px] text-slate-500">Press Right Arrow or Click Next</span>
+          <span className="text-[10px] text-slate-500">Right Arrow / Esc</span>
 
           <button
             onClick={handleNext}

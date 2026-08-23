@@ -1,11 +1,32 @@
-import React, { useState } from 'react';
-import { X, Edit3, AlertCircle, Check } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X, Edit3, AlertCircle } from 'lucide-react';
 
 export default function OverrideModal({ productId, attributeName, currentValue, onClose, onSubmit }) {
   const [overrideValue, setOverrideValue] = useState(currentValue || '');
   const [reason, setReason] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const reasonInputRef = useRef(null);
+
+  useEffect(() => {
+    // Focus reason input on mount
+    if (reasonInputRef.current) {
+      reasonInputRef.current.focus();
+    }
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      // Restore focus to body/main container on unmount
+      if (document.body) document.body.focus();
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +54,7 @@ export default function OverrideModal({ productId, attributeName, currentValue, 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-[30] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
       <div className="dossier-panel rounded-2xl w-full max-w-lg border border-cyan-500/40 shadow-2xl overflow-hidden font-sans">
         
         {/* Header */}
@@ -89,6 +110,7 @@ export default function OverrideModal({ productId, attributeName, currentValue, 
               <span>Justification Reason <span className="text-rose-400">* Required</span></span>
             </label>
             <textarea
+              ref={reasonInputRef}
               rows={3}
               required
               value={reason}

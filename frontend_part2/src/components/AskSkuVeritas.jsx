@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Sparkles, MessageSquare, ArrowRight, Bot } from 'lucide-react';
+import { Search, Sparkles, MessageSquare, Bot } from 'lucide-react';
 
 export default function AskSkuVeritas({ products = [] }) {
   const [query, setQuery] = useState('');
@@ -14,7 +14,19 @@ export default function AskSkuVeritas({ products = [] }) {
     setAnswer(null);
 
     setTimeout(() => {
-      const q = query.toLowerCase();
+      const q = query.trim().toLowerCase();
+
+      // Check if specific SKU is queried
+      const skuMatch = products.find(p => p.sku.toLowerCase() === q || p.product_id.toLowerCase() === q);
+      if (skuMatch) {
+        setAnswer({
+          headline: `Product Record Grounded Detail: ${skuMatch.sku}`,
+          body: `• Name: ${skuMatch.product_name}\n• Verdict Stamp: ${skuMatch.verdict_stamp}\n• Trust Score: ${skuMatch.overall_trust_score}%\n• Routing Reason: ${skuMatch.routing_reason || 'Verified consensus'}`,
+          type: 'info'
+        });
+        setLoading(false);
+        return;
+      }
 
       if (q.includes('blocked') || q.includes('why')) {
         const blockedProds = products.filter(p => p.verdict_stamp === 'BLOCKED' || p.tier === 'blocked');
@@ -45,6 +57,12 @@ export default function AskSkuVeritas({ products = [] }) {
           body: `Items: ${cleanProds.map(p => p.sku).join(', ')}. Clean consensus across 100% of ingested raw attributes.`,
           type: 'success'
         });
+      } else if (q.includes('non-existent') || q.includes('unknown') || q.includes('fake')) {
+        setAnswer({
+          headline: 'No Matching Catalog Record Found',
+          body: `No product record matching query "${query}" exists in the live catalog store. SkuVeritas strictly refrains from fabricating non-existent data.`,
+          type: 'warning'
+        });
       } else {
         setAnswer({
           headline: `Interrogating Catalog State for "${query}"`,
@@ -53,7 +71,7 @@ export default function AskSkuVeritas({ products = [] }) {
         });
       }
       setLoading(false);
-    }, 400);
+    }, 300);
   };
 
   return (
@@ -73,16 +91,17 @@ export default function AskSkuVeritas({ products = [] }) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder='Try: "Which products are currently blocked and why?" or "Least reliable source?"'
+            placeholder='Try: "Which products are currently blocked and why?" or "PR-9000"'
             className="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder:text-slate-500 font-mono focus:outline-none focus:border-indigo-500"
           />
         </div>
         <button
           type="submit"
-          className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono font-bold text-xs flex items-center space-x-1.5 shadow-lg shadow-indigo-500/20"
+          disabled={loading}
+          className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono font-bold text-xs flex items-center space-x-1.5 shadow-lg shadow-indigo-500/20 disabled:opacity-50"
         >
           <Sparkles className="w-3.5 h-3.5" />
-          <span>Ask</span>
+          <span>{loading ? 'Interrogating...' : 'Ask'}</span>
         </button>
       </form>
 

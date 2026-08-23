@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ShieldCheck, ShieldAlert, AlertTriangle, CheckCircle2, Edit3, ChevronDown, ChevronUp, Layers, ArrowLeft, Info, Printer, Command } from 'lucide-react';
+import { ShieldCheck, Edit3, ChevronDown, ChevronUp, Layers, ArrowLeft, Info, Printer, Command, CheckCircle2 } from 'lucide-react';
 import VerdictStamp from './VerdictStamp';
 import CredibilityDial from './CredibilityDial';
 import EvidenceChainPanel from './EvidenceChainPanel';
@@ -85,18 +85,26 @@ export default function ProductTruthReport({ product, onBack, onRefreshData }) {
   };
 
   // Keyboard Shortcuts (A = approve, O = override, E = view evidence)
+  // Strictly scoped to fire ONLY when no text input is focused!
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      const activeEl = document.activeElement;
+      const isInput = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.isContentEditable);
+      if (isInput) return; // Protect text editing!
+
       if (e.key === 'a' || e.key === 'A') {
+        e.preventDefault();
         handleApproveVerdict();
       } else if (e.key === 'o' || e.key === 'O') {
+        e.preventDefault();
         setOverrideModalAttr({ name: Object.keys(product?.attributes || {})[0] || 'pressure_rating', value: '' });
       } else if (e.key === 'e' || e.key === 'E') {
+        e.preventDefault();
         const firstAttr = Object.keys(product?.attributes || {})[0];
         if (firstAttr) loadEvidence(firstAttr);
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [product]);
@@ -113,25 +121,25 @@ export default function ProductTruthReport({ product, onBack, onRefreshData }) {
     <div className="space-y-6 font-sans">
       
       {/* Top Navigation & Keyboard Shortcuts Bar */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <button
           onClick={onBack}
-          className="inline-flex items-center space-x-2 text-xs font-mono font-semibold text-slate-400 hover:text-white px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 transition-all"
+          className="inline-flex items-center space-x-2 text-xs font-mono font-semibold text-slate-400 hover:text-white px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 transition-all shrink-0"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Catalog Queue</span>
         </button>
 
-        <div className="flex items-center space-x-3 text-xs font-mono text-slate-400">
+        <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-400">
           <button
             onClick={handlePrintAuditReport}
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold"
+            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 font-semibold transition-all shrink-0"
           >
             <Printer className="w-3.5 h-3.5 text-cyan-400" />
             <span>Print Audit Report (PDF)</span>
           </button>
           
-          <span className="hidden sm:flex items-center space-x-2 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-[10px]">
+          <span className="hidden sm:flex items-center space-x-2 bg-slate-950 px-2.5 py-1 rounded-lg border border-slate-800 text-[10px] shrink-0">
             <Command className="w-3 h-3 text-indigo-400" />
             <span>Shortcuts: [A] Approve | [O] Override | [E] Evidence</span>
           </span>
@@ -141,23 +149,23 @@ export default function ProductTruthReport({ product, onBack, onRefreshData }) {
       {/* Flagship Case File Header */}
       <div className="dossier-panel rounded-2xl p-6 border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
         
-        <div className="space-y-3 max-w-xl">
+        <div className="space-y-3 max-w-xl min-w-0">
           <div className="flex items-center space-x-3">
-            <span className="px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 text-xs font-mono font-bold">
+            <span className="px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 text-xs font-mono font-bold shrink-0">
               {product.sku}
             </span>
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-xs font-mono text-slate-400 truncate" title={product.category_path || "Dept > Class > Fine"}>
               {product.category_path || "Dept > Class > Fine"}
             </span>
           </div>
 
-          <h1 className="text-2xl font-extrabold text-white tracking-tight leading-snug">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-snug truncate" title={product.product_name}>
             {product.product_name}
           </h1>
         </div>
 
         {/* Dial & Verdict Stamp Container */}
-        <div className="flex items-center space-x-8 shrink-0">
+        <div className="flex items-center space-x-6 sm:space-x-8 shrink-0">
           <CredibilityDial score={Math.round(product.overall_trust_score || 100)} size={110} />
           
           <div className="flex flex-col items-center space-y-2">
@@ -178,8 +186,8 @@ export default function ProductTruthReport({ product, onBack, onRefreshData }) {
             : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-200'
         }`}>
           <Info className="w-5 h-5 mt-0.5 shrink-0" />
-          <div className="space-y-1">
-            <span className="font-extrabold uppercase text-sm tracking-wider">
+          <div className="space-y-1 min-w-0">
+            <span className="font-extrabold uppercase text-sm tracking-wider block">
               3-Tier Routing Decision: {routing.tier}
             </span>
             <p className="text-slate-300 leading-relaxed font-sans text-xs">
@@ -206,10 +214,10 @@ export default function ProductTruthReport({ product, onBack, onRefreshData }) {
               <div key={idx} className="transition-colors">
                 <div className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-800/30">
                   
-                  <div className="space-y-1 md:w-1/3">
+                  <div className="space-y-1 md:w-1/3 min-w-0">
                     <div className="flex items-center space-x-2">
-                      <span className="font-mono font-bold text-sm text-cyan-300">{attrName}</span>
-                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
+                      <span className="font-mono font-bold text-sm text-cyan-300 truncate" title={attrName}>{attrName}</span>
+                      <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase shrink-0 ${
                         attr.criticality === 'HIGH' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' : 'bg-slate-800 text-slate-400'
                       }`}>
                         {attr.criticality}
@@ -237,6 +245,7 @@ export default function ProductTruthReport({ product, onBack, onRefreshData }) {
                             key={sIdx}
                             className={`h-full ${colors[sIdx % colors.length]}`}
                             style={{ width: `${pct}%` }}
+                            title={`${s.source_id}: w=${s.reliability_weight}`}
                           />
                         );
                       })}
@@ -280,14 +289,14 @@ export default function ProductTruthReport({ product, onBack, onRefreshData }) {
 
       {/* Human Review Action Toolbar */}
       <div className="dossier-panel rounded-2xl p-6 border border-indigo-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-indigo-950/30 to-purple-950/30 font-mono">
-        <div>
+        <div className="min-w-0">
           <h4 className="font-bold text-white text-sm">Human Reviewer Operator Actions</h4>
           <p className="text-xs text-slate-400 mt-0.5">
             Take explicit action to update verdict stamp and trigger real-time Adaptive Source Trust adjustments.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3 shrink-0">
           <button
             onClick={handleApproveVerdict}
             disabled={submittingAction}
