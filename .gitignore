@@ -29,3 +29,5 @@ build/
 *.tmp
 temp_*
 upload_*
+
+.vercel

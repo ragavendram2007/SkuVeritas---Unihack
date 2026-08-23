@@ -1,11 +1,12 @@
 # SkuVeritas — Product Data Trust Engine & Dossier Platform
 
-[![GitHub Repository](https://img.shields.io/badge/GitHub-SkuVeritas--Unihack-181717?logo=github)](https://github.com/ragavendram2007/SkuVeritas---Unihack)
-[![Vercel Deployment](https://img.shields.io/badge/Vercel-Deployment--Ready-000000?logo=vercel)](https://vercel.com)
-[![FastAPI](https://img.shields.io/badge/FastAPI-v0.100+-009688?logo=fastapi)](https://fastapi.tiangolo.com)
-[![React](https://img.shields.io/badge/React-v18-61DAFB?logo=react)](https://reactjs.org)
+[![Live Vercel Deployment](https://img.shields.io/badge/Vercel-https%3A%2F%2Fskuveritas.vercel.app-000000?style=for-the-badge&logo=vercel)](https://skuveritas.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-SkuVeritas--Unihack-181717?style=for-the-badge&logo=github)](https://github.com/ragavendram2007/SkuVeritas---Unihack)
 
 **SkuVeritas** is a full-stack e-commerce catalog data trust engine built for high-scale catalog ingestion, truth resolution, physical conflict diagnosis, 3-tier risk routing, adaptive source trust learning, and downstream ERP export.
+
+🌐 **Live Vercel Production App**: [https://skuveritas.vercel.app](https://skuveritas.vercel.app)  
+📁 **GitHub Repository**: [https://github.com/ragavendram2007/SkuVeritas---Unihack](https://github.com/ragavendram2007/SkuVeritas---Unihack)
 
 ---
 
@@ -68,23 +69,13 @@ npm run dev
 
 ## 🌐 Live Endpoint Summary
 
-| Service | Port | Local URL | OpenAPI Swagger Docs |
+| Service | Port | Production / Local URL | OpenAPI Swagger Docs |
 | :--- | :--- | :--- | :--- |
+| **Vercel Production App** | Cloud | `https://skuveritas.vercel.app` | `https://skuveritas.vercel.app/docs` |
 | **Part 1 Data Engine API** | `:8000` | `http://localhost:8000` | `http://localhost:8000/docs` |
 | **Part 1 React Dashboard** | `:5173` | `http://localhost:5173` | — |
 | **Part 2 Trust Layer API** | `:8001` | `http://localhost:8001` | `http://localhost:8001/docs` |
 | **Part 2 Product Dossiers**| `:5174` | `http://localhost:5174` | — |
-
----
-
-## ☁️ Vercel Deployment Instructions
-
-1. Push latest changes to GitHub (Already pushed to `https://github.com/ragavendram2007/SkuVeritas---Unihack`).
-2. Log into your [Vercel Dashboard](https://vercel.com/dashboard).
-3. Click **Add New** $\rightarrow$ **Project**.
-4. Import repository **`ragavendram2007/SkuVeritas---Unihack`**.
-5. Select Root Directory as `./` (uses `vercel.json` root config) OR `./frontend_part2` for standalone frontend deployment.
-6. Click **Deploy**. Vercel will automatically build and deploy the production app!
 
 ---
 
