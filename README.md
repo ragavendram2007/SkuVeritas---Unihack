@@ -91,7 +91,7 @@ npm run dev
 
 ## 🛡 Non-Hardcoding & Evaluation Compliance Proofs
 
-- **Zero Hardcoded Branching**: All ingestion, field detection, matching, and diagnosis run dynamically via content patterns without literal SKU or manufacturer string checks.
+- **Zero Hardcoded Branching**: All ingestion, field detection, matching, and diagnosis run dynamically via content patterns without literal SKU or manufacturer string checks...
 - **Header-Exact Preservation**: 252 output columns are loaded dynamically from `expected_output.xlsx` at runtime.
 - **Altered Dataset Test Suite**: Tested against `sample_dataset_altered.xlsx` (renamed headers, dropped fields, reordered columns, and novel product categories like Solar Inverters and Hydraulic Pumps).
 - **Test Suite Results**:
