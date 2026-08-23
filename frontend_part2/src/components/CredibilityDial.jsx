@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CredibilityDial({ score = 100, size = 80 }) {
+export default function CredibilityDial({ score = 100, size = 90 }) {
   const angle = (score / 100) * 180 - 90; // -90 to +90 deg
 
   let color = "#10b981"; // Emerald
@@ -14,14 +14,14 @@ export default function CredibilityDial({ score = 100, size = 80 }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center text-center font-mono">
+    <div className="flex flex-col items-center justify-center text-center font-mono radial-glow-cyan relative z-10">
       <div className="relative flex items-center justify-center" style={{ width: size, height: size / 2 + 10 }}>
         <svg width={size} height={size / 2 + 10} viewBox="0 0 100 60">
           {/* Background Arc */}
           <path
             d="M 10 50 A 40 40 0 0 1 90 50"
             fill="none"
-            stroke="#1e293b"
+            stroke="rgba(255,255,255,0.08)"
             strokeWidth="10"
             strokeLinecap="round"
           />
@@ -44,8 +44,8 @@ export default function CredibilityDial({ score = 100, size = 80 }) {
         </svg>
       </div>
 
-      <span className="text-sm font-extrabold text-white mt-1">{score}%</span>
-      <span className="text-[9px] uppercase tracking-wider font-bold text-slate-400 mt-0.5">{ratingLabel}</span>
+      <span className="text-base font-extrabold text-white mt-1">{score}%</span>
+      <span className="text-[10px] uppercase tracking-wider font-bold text-slate-300 mt-0.5">{ratingLabel}</span>
     </div>
   );
 }
