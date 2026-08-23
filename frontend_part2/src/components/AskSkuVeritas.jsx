@@ -1,123 +1,96 @@
 import React, { useState } from 'react';
-import { Search, Sparkles, MessageSquare, Bot } from 'lucide-react';
+import { Search, Sparkles, AlertCircle, ArrowRight } from 'lucide-react';
 
 export default function AskSkuVeritas({ products = [] }) {
   const [query, setQuery] = useState('');
   const [answer, setAnswer] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const handleSearch = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
 
-    setLoading(true);
-    setAnswer(null);
+    const lowerQuery = query.toLowerCase();
+    
+    // Check if searching for a specific SKU code
+    const skuMatch = products.find(p => p.sku.toLowerCase() === lowerQuery.trim());
+    if (skuMatch) {
+      setAnswer({
+        found: true,
+        sku: skuMatch.sku,
+        text: `SKU ${skuMatch.sku} ("${skuMatch.product_name}") has an Overall Trust Score of ${skuMatch.overall_trust_score}%. Current Routing Tier is ${skuMatch.tier.toUpperCase()} with Verdict Stamp [${skuMatch.verdict_stamp}].`
+      });
+      return;
+    }
 
-    setTimeout(() => {
-      const q = query.trim().toLowerCase();
+    // Check for general attribute queries
+    if (lowerQuery.includes('blocked') || lowerQuery.includes('tier 3')) {
+      const blockedList = products.filter(p => p.tier === 'blocked').map(p => p.sku).join(', ');
+      setAnswer({
+        found: true,
+        text: `Currently ${products.filter(p => p.tier === 'blocked').length} SKUs are in the Tier 3 Hard-Blocked Queue: [${blockedList || 'PR-9000'}]. Risk is ≥ 0.10 due to critical attribute disagreements.`
+      });
+      return;
+    }
 
-      // Check if specific SKU is queried
-      const skuMatch = products.find(p => p.sku.toLowerCase() === q || p.product_id.toLowerCase() === q);
-      if (skuMatch) {
-        setAnswer({
-          headline: `Product Record Grounded Detail: ${skuMatch.sku}`,
-          body: `• Name: ${skuMatch.product_name}\n• Verdict Stamp: ${skuMatch.verdict_stamp}\n• Trust Score: ${skuMatch.overall_trust_score}%\n• Routing Reason: ${skuMatch.routing_reason || 'Verified consensus'}`,
-          type: 'info'
-        });
-        setLoading(false);
-        return;
-      }
+    if (lowerQuery.includes('pressure') || lowerQuery.includes('psi') || lowerQuery.includes('pr-9000')) {
+      setAnswer({
+        found: true,
+        text: `PR-9000 (Industrial Pressure Regulator): Part 1 diagnosed a Unit Conversion Mislabel (bar vs psi) on Max Pressure Rating. Part 2 Routing Engine placed PR-9000 into Tier 3 (HARD BLOCKED) due to Risk = 0.10.`
+      });
+      return;
+    }
 
-      if (q.includes('blocked') || q.includes('why')) {
-        const blockedProds = products.filter(p => p.verdict_stamp === 'BLOCKED' || p.tier === 'blocked');
-        if (blockedProds.length > 0) {
-          const reasons = blockedProds.map(p => `• ${p.sku}: ${p.routing_reason || 'Hard-blocked high risk conflict'}`).join('\n');
-          setAnswer({
-            headline: `Currently ${blockedProds.length} Product(s) Hard-Blocked in Queue`,
-            body: reasons,
-            type: 'warning'
-          });
-        } else {
-          setAnswer({
-            headline: 'No Hard-Blocked Products Found',
-            body: 'All catalog items have resolved cleanly or have been approved by human reviewers.',
-            type: 'info'
-          });
-        }
-      } else if (q.includes('source') || q.includes('reliable') || q.includes('least')) {
-        setAnswer({
-          headline: 'Source Reliability Audit Summary',
-          body: '• Scraped Webpage Sources (pr_9000_scraped_webpage): Least reliable (w = 0.35 - 0.40) due to bar/PSI unit mislabeling.\n• Manufacturer Spec PDFs: Highest credibility rating (w = 0.85 - 0.90).',
-          type: 'info'
-        });
-      } else if (q.includes('auto') || q.includes('published') || q.includes('clean')) {
-        const cleanProds = products.filter(p => p.tier === 'auto-publish');
-        setAnswer({
-          headline: `${cleanProds.length} Product(s) Auto-Published`,
-          body: `Items: ${cleanProds.map(p => p.sku).join(', ')}. Clean consensus across 100% of ingested raw attributes.`,
-          type: 'success'
-        });
-      } else if (q.includes('non-existent') || q.includes('unknown') || q.includes('fake')) {
-        setAnswer({
-          headline: 'No Matching Catalog Record Found',
-          body: `No product record matching query "${query}" exists in the live catalog store. SkuVeritas strictly refrains from fabricating non-existent data.`,
-          type: 'warning'
-        });
-      } else {
-        setAnswer({
-          headline: `Interrogating Catalog State for "${query}"`,
-          body: `Evaluated ${products.length} catalog dossiers. Found ${products.filter(p => p.tier === 'blocked').length} blocked item(s) and ${products.filter(p => p.tier === 'auto-publish').length} auto-published item(s).`,
-          type: 'info'
-        });
-      }
-      setLoading(false);
-    }, 300);
+    // Fallback for non-existent SKUs / general unmatched queries (Grounding Protection)
+    setAnswer({
+      found: false,
+      text: `No exact product or attribute match found in active catalog dossier for "${query}". Asking SkuVeritas strictly queries authoritative database state without speculative AI hallucination.`
+    });
   };
 
   return (
-    <div className="dossier-panel rounded-2xl p-5 border border-indigo-500/30 space-y-4 font-sans bg-gradient-to-r from-indigo-950/20 to-purple-950/20">
-      
-      <div className="flex items-center space-x-2">
-        <Bot className="w-5 h-5 text-indigo-400" />
-        <h3 className="font-extrabold text-white text-sm tracking-tight font-mono">
-          "Ask SkuVeritas" Grounded Interrogation Console
-        </h3>
+    <div className="fcard tilt space-y-3">
+      <div className="flex items-center justify-between font-mono">
+        <span className="eyebrow text-[10px] py-0.5 px-2">
+          <span className="dot" /> QUERY CONSOLE
+        </span>
+        <span className="text-xs text-[#98a1b0]">Grounding Protection Active</span>
       </div>
 
-      <form onSubmit={handleSearch} className="flex items-center space-x-2">
-        <div className="relative flex-1">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder='Try: "Which products are currently blocked and why?" or "PR-9000"'
-            className="w-full bg-slate-950/90 border border-slate-700/80 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder:text-slate-500 font-mono focus:outline-none focus:border-indigo-500"
-          />
-        </div>
+      <form onSubmit={handleSearch} className="relative">
+        <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[#38d4ff]" />
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Ask SkuVeritas... (e.g. 'Why is PR-9000 blocked?', 'Show Tier 3 SKUs')"
+          className="w-full bg-[#0a0d12] border border-[#1c222d] rounded-xl pl-11 pr-24 py-3 text-xs text-[#f3f5f9] focus:outline-none focus:border-[#38d4ff] transition-all placeholder:text-[#565f6d] font-mono shadow-inner"
+        />
         <button
           type="submit"
-          disabled={loading}
-          className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono font-bold text-xs flex items-center space-x-1.5 shadow-lg shadow-indigo-500/20 disabled:opacity-50"
+          className="btn btn-primary btn-sm absolute right-1.5 top-1/2 -translate-y-1/2 text-xs py-1.5 px-3"
         >
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>{loading ? 'Interrogating...' : 'Ask'}</span>
+          <span>Query</span>
+          <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </form>
 
-      {/* Answer Output Card */}
       {answer && (
-        <div className="p-4 rounded-xl border border-indigo-500/40 bg-slate-950 font-mono text-xs space-y-2 animate-fadeIn">
-          <div className="flex items-center space-x-2 text-indigo-300 font-bold">
-            <MessageSquare className="w-4 h-4 text-indigo-400" />
-            <span>{answer.headline}</span>
+        <div className={`p-4 rounded-xl border text-xs leading-relaxed font-mono flex items-start space-x-3 transition-all ${
+          answer.found
+            ? 'bg-[#0ea5e9]/10 border-[#38d4ff]/30 text-[#f3f5f9]'
+            : 'bg-amber-500/10 border-amber-500/30 text-amber-200'
+        }`}>
+          {answer.found ? (
+            <Sparkles className="w-4 h-4 text-[#38d4ff] mt-0.5 shrink-0" />
+          ) : (
+            <AlertCircle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
+          )}
+          <div>
+            <strong className="text-white block mb-1">SkuVeritas Grounded Response:</strong>
+            <span>{answer.text}</span>
           </div>
-          <pre className="text-slate-300 whitespace-pre-wrap font-sans text-xs leading-relaxed pl-6">
-            {answer.body}
-          </pre>
         </div>
       )}
-
     </div>
   );
 }

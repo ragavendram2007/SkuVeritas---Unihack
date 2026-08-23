@@ -17,6 +17,7 @@ export default function App() {
   const [isPresenterMode, setIsPresenterMode] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [spotPos, setSpotPos] = useState({ x: 0, y: 0 });
 
   const loadProductsData = async () => {
     try {
@@ -53,6 +54,15 @@ export default function App() {
     alert('Demo State Reset: All review actions and adaptive trust nudges returned to seed state.');
   };
 
+  // Unify Cursor Spotlight Tracking Listener
+  useEffect(() => {
+    const handlePointerMove = (e) => {
+      setSpotPos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('pointermove', handlePointerMove);
+    return () => window.removeEventListener('pointermove', handlePointerMove);
+  }, []);
+
   // Global Navigation Keyboard Shortcuts: 1 = Dashboard, 2 = Report, 3 = Trust Ledger, 4 = ERP, P = Presenter Tour
   useEffect(() => {
     const handleGlobalNavKeyDown = (e) => {
@@ -82,8 +92,19 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
+    <div className="min-h-screen bg-[#040608] text-[#f3f5f9] flex flex-col font-sans relative">
       
+      {/* Unify Ambient Flow & Grain & Cursor Spotlight Overlays */}
+      <div className="bg-flow" />
+      <div className="bg-grain" />
+      <div
+        className="cursor-spot"
+        style={{
+          transform: `translate(${spotPos.x}px, ${spotPos.y}px) translate(-50%, -50%)`,
+          opacity: 0.85
+        }}
+      />
+
       <Navbar
         activeView={activeView}
         setActiveView={setActiveView}
@@ -92,7 +113,7 @@ export default function App() {
         onDemoReset={handleDemoReset}
       />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         
         {error && (
           <div className="mb-6 p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-300 flex items-center justify-between text-xs font-mono shadow-lg">
@@ -102,7 +123,7 @@ export default function App() {
             </div>
             <button
               onClick={loadProductsData}
-              className="px-3.5 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-500/30 rounded-xl transition-all font-semibold"
+              className="btn btn-ghost text-xs"
             >
               Retry Connection
             </button>
@@ -158,16 +179,16 @@ export default function App() {
       )}
 
       {/* Footer */}
-      <footer className="border-t border-slate-900/90 bg-[#04060c] py-6 text-slate-400 text-xs font-mono">
+      <footer className="border-t border-[#151a23] bg-[#040608]/90 py-6 text-slate-400 text-xs font-mono relative z-10">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span>SkuVeritas Part 2 Complete Build — Trust & Delivery Layer</span>
+            <span className="brand-mark text-xs" style={{ width: '22px', height: '22px' }}>S</span>
+            <span>SkuVeritas Part 2 Trust & Delivery Layer</span>
           </div>
           <div className="flex items-center space-x-4 text-slate-400">
-            <span>Part 2 Backend: :8001</span>
+            <span>FastAPI API: :8001</span>
             <span>•</span>
-            <span>Part 2 Frontend: :5174</span>
+            <span>Unify Glow-Dark Theme</span>
           </div>
         </div>
       </footer>

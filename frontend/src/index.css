@@ -4,102 +4,216 @@
 
 @layer base {
   :root {
-    /* Glow-Dark SaaS Design Tokens (Unify-inspired) */
-    --bg-base-start: #060b14;
-    --bg-base-end: #0a1220;
-    --glass-surface: rgba(13, 21, 36, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    
-    --glow-cyan: rgba(86, 204, 242, 0.15);
-    --glow-blue: rgba(47, 128, 255, 0.20);
-    
-    --text-heading: #f5f7fa;
-    --text-body: #d1d5db;
-    --text-muted: #8b96a5;
+    /* Exact Unify Color System */
+    --bg: #040608;
+    --bg-soft: #0a0d12;
+    --card: #0d1017;
+    --card-2: #0f131b;
+    --line: #1c222d;
+    --line-soft: #151a23;
+    --text: #f3f5f9;
+    --text-dim: #98a1b0;
+    --text-faint: #565f6d;
+    --blue: #0ea5e9;
+    --blue-bright: #38d4ff;
+    --blue-deep: #0c4a6e;
+    --cyan: #22e8ff;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 
   body {
-    background: linear-gradient(180deg, var(--bg-base-start) 0%, var(--bg-base-end) 100%);
-    background-attachment: fixed;
-    color: var(--text-body);
-    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  h1, h2, h3, h4, .brand {
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer components {
-  /* Glass Card Surface */
-  .glass-card {
-    background-color: var(--glass-surface);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 1rem;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  }
-
-  /* Radial Glow Accents */
-  .radial-glow-cyan {
-    position: relative;
-  }
-  .radial-glow-cyan::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 140px;
-    height: 140px;
-    background: radial-gradient(circle, rgba(86, 204, 242, 0.25) 0%, rgba(47, 128, 255, 0.05) 60%, transparent 80%);
-    border-radius: 50%;
-    filter: blur(24px);
-    pointer-events: none;
+  /* Ambient Flow & Grain Overlays */
+  .bg-flow {
+    position: fixed;
+    inset: 0;
     z-index: 0;
-  }
-
-  .radial-glow-blue {
-    position: relative;
-  }
-  .radial-glow-blue::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 180px;
-    height: 180px;
-    background: radial-gradient(circle, rgba(47, 128, 255, 0.30) 0%, rgba(99, 102, 241, 0.05) 60%, transparent 80%);
-    border-radius: 50%;
-    filter: blur(28px);
     pointer-events: none;
-    z-index: 0;
+    background:
+      radial-gradient(620px 420px at 50% 0%, rgba(14, 165, 233, 0.30), transparent 68%),
+      radial-gradient(520px 640px at 50% 46%, rgba(34, 232, 255, 0.14), transparent 70%),
+      radial-gradient(560px 420px at 50% 88%, rgba(14, 165, 233, 0.22), transparent 70%);
+    opacity: 0.9;
   }
 
-  /* Uppercase Pill Badges */
-  .badge-pill {
+  .bg-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .cursor-spot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 520px;
+    height: 520px;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34, 232, 255, 0.10) 0%, rgba(14, 165, 233, 0.05) 40%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease;
+    opacity: 0.8;
+  }
+
+  /* Unify Brand Mark */
+  .brand-mark {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, var(--blue), var(--cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 22px rgba(14, 165, 233, 0.55);
+    font-size: 16px;
+    font-weight: 800;
+    color: #04101f;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* Unify Eyebrow Pill Badges */
+  .eyebrow {
     display: inline-flex;
-    items-center: center;
-    gap: 0.375rem;
-    padding: 0.25rem 0.625rem;
-    border-radius: 9999px;
-    background: rgba(47, 128, 255, 0.10);
-    border: 1px solid rgba(86, 204, 242, 0.25);
-    color: #56ccf2;
-    font-size: 0.6875rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
+    color: var(--blue-bright);
+    background: linear-gradient(180deg, rgba(14, 165, 233, 0.14), rgba(14, 165, 233, 0.04));
+    border: 1px solid rgba(90, 167, 255, 0.28);
+    padding: 5px 14px 5px 10px;
+    border-radius: 99px;
+  }
+  .eyebrow .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue-bright);
+    box-shadow: 0 0 8px var(--blue-bright);
   }
 
-  /* Gradient Buttons */
-  .btn-gradient {
-    background: linear-gradient(135deg, #2f80ff 0%, #56ccf2 100%);
-    color: #ffffff;
-    font-weight: 700;
-    transition: all 0.2s ease-in-out;
+  /* Unify Glass Card & Tilt */
+  .fcard {
+    background: linear-gradient(180deg, var(--card-2), var(--card));
+    border: 1px solid var(--line-soft);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.65);
   }
-  .btn-gradient:hover {
-    box-shadow: 0 0 20px rgba(86, 204, 242, 0.4);
+
+  .glass-card {
+    background: linear-gradient(180deg, var(--card-2), var(--card));
+    border: 1px solid var(--line-soft);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.65);
+  }
+
+  .tilt {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .tilt::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.06), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .tilt:hover::after {
+    opacity: 1;
+  }
+  .tilt:hover {
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.65);
+    transform: translateY(-3px);
+  }
+
+  /* Unify Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 9px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover {
     transform: translateY(-1px);
+  }
+  .btn-primary {
+    background: linear-gradient(180deg, #38d4ff, #0ea5e9);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(47, 110, 232, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 8px 26px rgba(47, 110, 232, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--line);
+    color: var(--text);
+  }
+  .btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: #2a3140;
+  }
+
+  /* Unify Animated Bars */
+  .bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 80px;
+    padding: 0 4px;
+  }
+  .bars i {
+    flex: 1;
+    height: var(--h, 50%);
+    border-radius: 5px 5px 0 0;
+    background: linear-gradient(180deg, #7fe3ff, #0c4a6e);
+    opacity: 0.7;
+    position: relative;
+    transition: all 0.4s ease;
+  }
+  .bars i.peak {
+    background: linear-gradient(180deg, #d4f7ff, #22e8ff);
+    box-shadow: 0 0 28px rgba(34, 232, 255, 0.65);
+    opacity: 1;
   }
 }
